@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Diseña tres vidas posibles para tus próximos cinco años, compáralas y pruébalas en pequeño. Un ejercicio guiado para cuando no sabes qué camino coger.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Odyssey Plan · ¿No sabes qué camino coger?">
+<meta property="og:description" content="Diseña tres vidas posibles para tus próximos cinco años, compáralas y pruébalas en pequeño.">
+<meta property="og:image" content="https://odyssey-plan.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FBF9F3">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23FBF9F3'/%3E%3Cpath d='M5 25 C11 25 13 21 16 19 C20 17 23 25 28 25' fill='none' stroke='%239CC15E' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M16 19 C20 15 23 15 28 15' fill='none' stroke='%23E5897B' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M16 19 C19 12 23 7 28 6' fill='none' stroke='%23F0C445' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;-webkit-text-size-adjust:100%}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Odyssey Plan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Kalam:wght@400;700&display=swap">
+<style>
+/* Layout: cuaderno de acuarela en una columna para móvil; cabecera de progreso arriba, navegación abajo; la línea de cinco años se desliza en horizontal. Diseño de un solo tema (papel claro) a propósito. */
+:root{
+  --paper:#FBF9F3;
+  --ink:#1D3263;
+  --ink-2:#4A587E;
+  --pencil:#BFC5D5;
+  --blue:#6E9BD6;
+  --green:#9CC15E;
+  --red:#E5897B;
+  --yellow:#F0C445;
+  --alert:#A9412F;
+  --hand:"Caveat","Segoe Print","Bradley Hand",cursive;
+  --body:"Kalam","Segoe UI",system-ui,sans-serif;
+  --hr:255px 15px 225px 15px/15px 225px 15px 255px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background-color:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .4 0 0 0 0 .3 .14 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+h1,h2,h3{font-family:var(--hand);font-weight:700;line-height:1.05;text-wrap:balance;margin:0;color:var(--ink)}
+h1{font-size:clamp(2.4rem,10vw,3.1rem)}
+h2{font-size:1.9rem}
+h3{font-size:1.6rem}
+p{margin:0}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2.5px dashed var(--ink);outline-offset:3px}
+
+.wash{background:var(--wash,var(--w-blue)) center/100% 100% no-repeat;padding:.02em .4em .08em;margin-left:-.3em;display:inline-block}
+.w-blue{--wash:var(--w-blue)}.w-yellow{--wash:var(--w-yellow)}.w-green{--wash:var(--w-green)}.w-red{--wash:var(--w-red)}
+.l1{--wash:var(--w-green);--tint:var(--green)}
+.l2{--wash:var(--w-red);--tint:var(--red)}
+.l3{--wash:var(--w-yellow);--tint:var(--yellow)}
+
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);
+  padding-block:10px 8px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top-in{max-width:620px;margin:0 auto;display:flex;flex-direction:column;gap:6px}
+.top-row{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:.95rem;color:var(--ink-2)}
+.brand{font-family:var(--hand);font-weight:700;font-size:1.7rem;color:var(--ink)}
+.bar{height:10px;border-bottom:1.5px solid var(--pencil);position:relative}
+.bar span{display:block;height:100%;background:var(--w-blue) center/100% 100% no-repeat;transition:width .35s}
+
+main{padding-block:14px 130px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.view{max-width:620px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+
+.lead{font-size:1.1rem;color:var(--ink-2);max-width:62ch}
+.hint{font-size:.95rem;color:var(--ink-2)}
+.eyebrow{font-size:.85rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.note{font-size:.92rem;color:var(--ink-2)}
+
+.btns{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{border:2px solid var(--ink);border-radius:var(--hr);padding:8px 22px;min-height:48px;cursor:pointer;
+  background:var(--ink);color:var(--paper);font-family:var(--hand);font-weight:700;font-size:1.45rem;line-height:1.1}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.small{font-size:1.25rem;min-height:42px;padding:6px 16px}
+.btn:active{transform:translateY(1px)}
+
+.hero{display:flex;flex-direction:column;gap:16px;padding-top:4px}
+.paths{width:100%;max-width:100%;height:auto}
+
+.lifes{display:flex;flex-direction:column;gap:12px}
+.lifechip{display:flex;flex-direction:column;gap:2px}
+.lifechip b{font-family:var(--hand);font-size:1.6rem;line-height:1.1}
+.lifechip span{color:var(--ink-2);font-size:.98rem}
+
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.steps li{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:start}
+.steps .n{width:40px;height:40px;display:grid;place-items:center;font-family:var(--hand);font-weight:700;font-size:1.6rem;
+  border:2px solid var(--ink);border-radius:var(--hr)}
+.steps h3{font-size:1.45rem}
+.steps p{color:var(--ink-2)}
+
+.sample{margin:0;display:flex;flex-direction:column;gap:8px}
+.sample a{display:block;border:1.5px solid var(--pencil);border-radius:var(--hr);overflow:hidden;background:#fff;padding:4px}
+.sample img{display:block;width:100%;height:auto;border-radius:8px}
+.sample figcaption{font-size:.95rem;color:var(--ink-2)}
+
+.lifehead{display:flex;flex-direction:column;gap:10px}
+.lifehead .ask{font-family:var(--hand);font-size:1.65rem;line-height:1.15;color:var(--ink)}
+.swoosh{width:150px;height:14px;display:block;margin-top:-6px}
+
+.block{display:flex;flex-direction:column;gap:12px;padding-top:18px;border-top:1.5px dashed var(--pencil)}
+.block h2{margin-bottom:-2px}
+
+input[type=text],textarea{width:100%;background:transparent;border:0;border-bottom:1.5px solid var(--pencil);
+  border-radius:0;padding:8px 2px;min-height:44px;font-size:1.02rem;color:var(--ink)}
+input[type=text]::placeholder,textarea::placeholder{color:#8F98B3}
+input[type=text]:focus,textarea:focus{outline:none;border-bottom:2.5px solid var(--ink)}
+.counter{font-size:.9rem;color:var(--ink-2)}
+.counter.over{color:var(--alert);font-weight:700}
+
+/* Línea de cinco años */
+.tl{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:8px;margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)))}
+.tl-in{display:grid;grid-template-columns:repeat(5,min(76vw,250px));padding-top:48px;padding-left:8px;padding-right:28px;width:max-content}
+.tl-card{position:relative;scroll-snap-align:start;border-left:1.5px solid var(--pencil);padding:16px 12px 6px;display:flex;flex-direction:column;gap:8px}
+.tl-card::before{content:"";position:absolute;left:-1px;right:0;top:-14px;height:2.5px;background:var(--ink);border-radius:2px}
+.tl-card .tick{position:absolute;left:-6px;top:-42px;font-family:var(--hand);font-weight:700;font-size:1.35rem}
+.tl-card:last-child{border-right:1.5px solid var(--pencil)}
+.tl-card:last-child .end{position:absolute;right:-6px;top:-42px;font-family:var(--hand);font-weight:700;font-size:1.35rem}
+.tl-card:last-child::after{content:"";position:absolute;right:-14px;top:-20px;border:7px solid transparent;border-left:12px solid var(--ink)}
+.tl-card h3{font-size:1.5rem;align-self:flex-start}
+.tl-card small{font-size:.85rem;color:var(--ink-2)}
+.tl-card textarea{min-height:150px;resize:vertical;border:0;line-height:30px;padding:0 2px;
+  background:repeating-linear-gradient(transparent 0 29px,var(--pencil) 29px 30px)}
+.tl-card textarea:focus{border:0;box-shadow:inset 0 -2.5px 0 var(--ink)}
+.swipe{font-size:.92rem;color:var(--ink-2)}
+
+/* Qué definir */
+.checks{display:flex;flex-direction:column;gap:4px}
+.check{display:grid;grid-template-columns:30px 1fr;gap:8px;align-items:center}
+.check input[type=checkbox]{appearance:none;-webkit-appearance:none;width:24px;height:24px;margin:0;cursor:pointer;
+  border:2px solid var(--ink);border-radius:4px 7px 5px 6px;background:transparent;display:grid;place-items:center}
+.check input[type=checkbox]:checked{background:var(--w-blue) center/120% 120% no-repeat}
+.check input[type=checkbox]:checked::after{content:"✓";font-weight:700;font-size:18px;line-height:1;color:var(--ink)}
+.check textarea.grow{min-height:40px}
+textarea.grow{resize:none;overflow:hidden;line-height:1.4;min-height:44px}
+.check input[type=checkbox]:checked + textarea{text-decoration:line-through;text-decoration-color:var(--ink-2)}
+
+/* Preguntas */
+.qs{display:flex;flex-direction:column;gap:4px}
+.q{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:center}
+.q .bullet{width:13px;height:13px;border-radius:50%;background:var(--blue);opacity:.75;box-shadow:0 0 0 3px rgba(110,155,214,.25)}
+
+/* Indicadores */
+.gauges{display:grid;grid-template-columns:1fr 1fr;gap:18px 14px}
+.gauge{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0;text-align:center}
+.gauge .gl{font-family:var(--hand);font-weight:700;font-size:1.6rem;line-height:1}
+.gauge svg{width:100%;max-width:150px;height:auto}
+.num{font-family:var(--hand);font-weight:700;font-size:1.6rem;line-height:1;background:var(--w-yellow) center/100% 100% no-repeat;padding:2px 14px 4px;margin-top:-4px}
+.gauge .gh{font-size:.82rem;color:var(--ink-2);min-height:2.5em}
+input[type=range]{width:100%;accent-color:var(--ink);min-height:30px}
+
+/* Comparar */
+.legend{display:flex;flex-direction:column;gap:6px}
+.legend div{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center;min-width:0}
+.legend b{font-family:var(--hand);font-size:1.4rem;background:var(--wash) center/100% 100% no-repeat;padding:0 10px}
+.legend span{overflow-wrap:anywhere}
+.cmp{display:flex;flex-direction:column;gap:8px}
+.cmp-row{display:grid;grid-template-columns:24px 1fr 34px;gap:8px;align-items:center}
+.cmp-row b{font-family:var(--hand);font-size:1.35rem}
+.cmp-track{height:22px;border-bottom:1.5px solid var(--pencil)}
+.cmp-track span{display:block;height:100%;background:var(--wash) center/100% 100% no-repeat}
+.cmp-n{font-family:var(--hand);font-weight:700;font-size:1.3rem;text-align:right}
+
+.picks{display:flex;flex-direction:column;gap:10px}
+.pick{display:flex;gap:12px;align-items:center;padding:10px 14px;border:1.5px solid var(--pencil);border-radius:var(--hr);cursor:pointer}
+.pick input{accent-color:var(--ink);width:20px;height:20px;flex:none}
+.pick:has(input:checked){border:2px solid var(--ink);background:var(--wash) center/100% 100% no-repeat}
+
+/* Resumen */
+.sumlife{display:flex;flex-direction:column;gap:10px;padding-top:18px;border-top:1.5px dashed var(--pencil)}
+.sumlife ul{margin:0;padding-left:1.1em}
+.sumlife li{margin-bottom:2px}
+.mini{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.mini div{display:flex;flex-direction:column;align-items:center;font-size:.8rem;color:var(--ink-2);min-width:0}
+.mini svg{width:100%;max-width:80px;height:auto}
+.mini b{font-family:var(--hand);font-size:1.25rem;color:var(--ink)}
+#copyText{font-size:.9rem;min-height:150px;border:1.5px solid var(--pencil);border-radius:8px;padding:8px}
+.ok{font-family:var(--hand);font-size:1.4rem;font-weight:700}
+
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--paper);border-top:1.5px solid var(--pencil);
+  padding-top:10px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.nav-in{max-width:620px;margin:0 auto;display:flex;gap:12px}
+.nav .btn{flex:1}
+
+@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <filter id="wc" x="-15%" y="-15%" width="130%" height="130%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="3" seed="4" result="t"/>
+    <feDisplacementMap in="SourceGraphic" in2="t" scale="7"/>
+  </filter>
+  <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" seed="9" result="t"/>
+    <feDisplacementMap in="SourceGraphic" in2="t" scale="10"/>
+    <feGaussianBlur stdDeviation="0.8"/>
+  </filter>
+</defs></svg>
+
+<div class="top">
+  <div class="top-in">
+    <div class="top-row"><span class="brand">Odyssey Plan</span><span id="stepLabel">Paso 1 de 8</span></div>
+    <div class="bar" aria-hidden="true"><span id="barFill" style="width:12.5%"></span></div>
+  </div>
+</div>
+
+<main><div class="view" id="view"></div></main>
+
+<nav class="nav" aria-label="Navegación entre pasos">
+  <div class="nav-in">
+    <button class="btn ghost" id="prevBtn" type="button">Atrás</button>
+    <button class="btn" id="nextBtn" type="button">Siguiente</button>
+  </div>
+</nav>
+
+<script>
+(function(){
+const C={ink:'#1D3263',ink2:'#4A587E',pencil:'#BFC5D5',paper:'#FBF9F3',blue:'#6E9BD6',green:'#9CC15E',red:'#E5897B',yellow:'#F0C445'};
+
+/* Manchas de acuarela como fondos SVG */
+function wash(hex,seed){return `url("data:image/svg+xml,${encodeURIComponent(washSvg(hex,seed))}")`}
+function washSvg(hex,seed){
+  return `<svg xmlns='http://www.w3.org/2000/svg' width='240' height='80' viewBox='0 0 240 80' preserveAspectRatio='none'><filter id='f' x='-10%' y='-25%' width='120%' height='150%'><feTurbulence type='fractalNoise' baseFrequency='0.035' numOctaves='3' seed='${seed}'/><feDisplacementMap in='SourceGraphic' scale='16'/><feGaussianBlur stdDeviation='0.7'/></filter><g filter='url(#f)'><rect x='8' y='12' width='224' height='56' rx='26' fill='${hex}' fill-opacity='.42'/><rect x='30' y='22' width='160' height='34' rx='16' fill='${hex}' fill-opacity='.22'/><rect x='8' y='12' width='224' height='56' rx='26' fill='none' stroke='${hex}' stroke-opacity='.38' stroke-width='3'/></g></svg>`;
+}
+const rs=document.documentElement.style;
+rs.setProperty('--w-blue',wash(C.blue,3));
+rs.setProperty('--w-green',wash(C.green,7));
+rs.setProperty('--w-red',wash(C.red,11));
+rs.setProperty('--w-yellow',wash(C.yellow,5));
+
+const ROUTES=['inicio','como-funciona','vida-1','vida-2','vida-3','comparar','probar','resumen'];
+const Y0=new Date().getFullYear()+1;
+const KEY='plan-odisea-v1';
+
+const LIVES=[
+ {name:'Mi camino actual',ask:'Si sigo por donde voy y todo me sale bien, ¿cómo sería mi vida?',
+  desc:'La mejor versión posible de lo que ya haces. No la versión mediocre: la buena.',
+  ph:'Ej.: De técnico a jefe de proyecto',
+  ideas:['Si todo te sale bien donde estás, ¿dónde te ves en dos años?','¿Qué parte de lo que haces hoy te gustaría hacer más?','¿Qué aprenderías para crecer sin cambiar de camino?','¿Qué cambiaría en tu día a día si te consolidaras?','¿Qué cosa pequeña llevas tiempo queriendo hacer y no haces?']},
+ {name:'El plan B',ask:'Si lo que hago hoy desapareciera mañana, ¿a qué me dedicaría?',
+  desc:'Tu trabajo o tu sector dejan de existir. Tiene que ser algo distinto de la vida 1.',
+  ph:'Ej.: Fisio en mi propia consulta',
+  ideas:['¿Qué se te daba bien antes de empezar en lo que haces?','¿En qué trabajo de otra persona te fijas con un poco de envidia?','¿Qué te piden siempre tus amigos que les ayudes a hacer?','Si tuvieras que reciclarte en un año, ¿qué estudiarías?','¿Qué afición podría convertirse en trabajo?']},
+ {name:'Sin condicionantes',ask:'Si el dinero y el miedo no decidieran por mí, ¿qué vida elegiría?',
+  desc:'Aquí vale soñar. Lo único que se pide es que sea concreto.',
+  ph:'Ej.: Mi propia escuela de yoga',
+  ideas:['¿Qué harías si supieras que no puedes fracasar?','¿Dónde vivirías si pudieras elegir cualquier sitio?','¿Qué querías ser con 12 años?','¿Qué proyecto has descartado por "no es realista"?','¿Qué te gustaría que contaran de ti dentro de cinco años?']}
+];
+const GAUGES=[
+ {k:'recursos',l:'Recursos',h:'¿Tienes tiempo, dinero y contactos?',c:C.blue},
+ {k:'gusto',l:'Interés',h:'¿Te ilusiona o te da pereza?',c:C.green},
+ {k:'confianza',l:'Confianza',h:'¿Te ves capaz de hacerlo?',c:C.red},
+ {k:'coherencia',l:'Coherencia',h:'¿Encaja con lo que valoras?',c:C.blue}
+];
+
+const emptyDef=()=>[0,1,2,3].map(()=>({t:'',ok:false}));
+function blank(){return{
+  lives:[0,1,2].map(()=>({title:'',years:['','','','',''],q:['','',''],def:emptyDef(),g:{recursos:50,gusto:50,confianza:50,coherencia:50}})),
+  pick:'',next:[0,1,2].map(()=>({talk:'',test:''}))}}
+const D=(arr)=>arr.map(t=>({t,ok:false}));
+function example(){return{
+  lives:[
+   {title:'De administrativo a jefe de equipo',years:['Pido llevar el proyecto de facturación.','Hago un curso de gestión de equipos.','Me ascienden a coordinador.','Dirijo un equipo de cinco personas.','Valoro dar el salto a una empresa más grande.'],
+    q:['¿Me seguirá gustando esto dentro de cinco años?','¿Sé dirigir a personas?','¿Hay sitio para crecer aquí?'],
+    def:D(['Qué formación de gestión necesito','Con quién hablarlo en la empresa','Cuánto tiempo le doy antes de cambiar','']),g:{recursos:75,gusto:45,confianza:65,coherencia:40}},
+   {title:'Profe de inglés en mi pueblo',years:['Saco el C2 y doy clases por las tardes.','Alquilo un local pequeño.','Tengo 40 alumnos y dejo la oficina.','Contrato a otra profesora.','Organizo campamentos de verano en inglés.'],
+    q:['¿Hay demanda suficiente en el pueblo?','¿Aguantaría un año ganando menos?','¿Me gusta enseñar o solo la idea de enseñar?'],
+    def:D(['Certificado de nivel C2','Precio de las clases','Local propio o clases en casa','Cuántos alumnos necesito para vivir']),g:{recursos:50,gusto:70,confianza:55,coherencia:75}},
+   {title:'Mi propia escuela de yoga',years:['Me tomo un tiempo. Viajo a Asia y me sumerjo en la meditación con monjes budistas.','Profundizo en la práctica (meditación y yoga) y me formo como instructor.','Regreso, diseño el proyecto y defino la escuela: espacio, equipo y propuesta.','Lanzo la escuela. Primeros alumnos, programas regulares y una comunidad que crece.','Consolido la escuela, amplío la oferta (retiros, formación) y vivo con más equilibrio.'],
+    q:['¿Qué aspectos de mi vida actual quiero conservar?','¿Estoy dispuesto a la incertidumbre inicial?','¿Cómo sería mi día a día en cinco años?'],
+    def:D(['Formación y certificaciones (meditación y yoga)','Modelo de la escuela: ubicación, tamaño, servicios','Inversión y plan de viabilidad','Equipo y colaboradores']),g:{recursos:60,gusto:95,confianza:65,coherencia:90}}],
+  pick:'2',
+  next:[{talk:'Mi jefe, sobre qué haría falta para coordinar',test:'Pedir llevar una reunión de equipo este mes'},
+        {talk:'Una profe que tenga academia propia',test:'Dar una clase gratis a dos vecinos'},
+        {talk:'Alguien que haya abierto un centro de yoga',test:'Hacer un retiro de meditación de un fin de semana'}]}}
+
+function norm(s){
+  const b=blank();
+  if(!s||!Array.isArray(s.lives))return b;
+  s.lives=b.lives.map((bl,i)=>{const l=Object.assign(bl,s.lives[i]||{});l.g=Object.assign({recursos:50,gusto:50,confianza:50,coherencia:50},l.g);if(!Array.isArray(l.def))l.def=emptyDef();return l});
+  s.next=b.next.map((bn,i)=>Object.assign(bn,(s.next||[])[i]||{}));
+  if(typeof s.pick!=='string')s.pick='';
+  return s;
+}
+let S;
+try{S=norm(JSON.parse(localStorage.getItem(KEY)))}catch(e){S=blank()}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function setP(p,v){const ks=p.split('.');const last=ks.pop();const o=ks.reduce((o,k)=>o[k],S);o[last]=v;save()}
+const words=s=>s.trim()?s.trim().split(/\s+/).length:0;
+const lifeTitle=i=>S.lives[i].title.trim()||('Vida '+(i+1)+' · '+LIVES[i].name.toLowerCase());
+
+/* Medidor dibujado */
+function pt(r,v){const a=Math.PI*(1-v/100);return[(70+r*Math.cos(a)).toFixed(2),(74-r*Math.sin(a)).toFixed(2)]}
+function band(v0,v1,ro,ri){const[a,b]=pt(ro,v0),[c,d]=pt(ro,v1),[e,f]=pt(ri,v1),[g,h]=pt(ri,v0);
+  return `M${a} ${b}A${ro} ${ro} 0 0 1 ${c} ${d}L${e} ${f}A${ri} ${ri} 0 0 0 ${g} ${h}Z`}
+function dial(v,col){
+  let ticks='';for(let k=1;k<10;k++){const[a,b]=pt(38,k*10),[c,d]=pt(64,k*10);ticks+=`<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" style="stroke:${C.paper};stroke-width:1.8"/>`}
+  const[nx,ny]=pt(54,v);
+  return `<svg viewBox="0 0 140 82" aria-hidden="true"><g filter="url(#wc)"><path d="${band(0,100,62,40)}" style="fill:${col};fill-opacity:.2"/>${v>0?`<path d="${band(0,v,62,40)}" style="fill:${col};fill-opacity:.62"/>`:''}</g>${ticks}<path d="${band(0,100,62,40)}" style="fill:none;stroke:${col};stroke-opacity:.5;stroke-width:1.2"/><line x1="70" y1="74" x2="${nx}" y2="${ny}" style="stroke:${C.ink};stroke-width:4;stroke-linecap:round"/><circle cx="70" cy="74" r="5.5" style="fill:${C.ink}"/></svg>`;
+}
+const swoosh=`<svg class="swoosh" viewBox="0 0 150 14" aria-hidden="true"><path d="M3 9 C40 3 90 3 147 7" style="fill:none;stroke:${C.ink};stroke-width:2;stroke-linecap:round"/></svg>`;
+
+const view=document.getElementById('view');
+
+const PAGES={
+'inicio':()=>`
+ <section class="hero">
+  <svg class="paths" viewBox="0 0 340 170" role="img" aria-label="Un camino que se divide en tres">
+   <g filter="url(#soft)">
+    <ellipse cx="270" cy="40" rx="70" ry="30" style="fill:${C.blue};fill-opacity:.16"/>
+    <ellipse cx="90" cy="150" rx="110" ry="22" style="fill:${C.green};fill-opacity:.16"/>
+   </g>
+   <g filter="url(#wc)" style="fill:none;stroke-linecap:round">
+    <path d="M16 140 C70 140 100 124 140 112" style="stroke:${C.ink};stroke-width:5"/>
+    <path d="M140 112 C200 96 240 140 306 140" style="stroke:${C.green};stroke-width:9;stroke-opacity:.8"/>
+    <path d="M140 112 C200 96 240 92 306 88" style="stroke:${C.red};stroke-width:9;stroke-opacity:.8"/>
+    <path d="M140 112 C180 80 230 36 306 34" style="stroke:${C.yellow};stroke-width:9;stroke-opacity:.9"/>
+   </g>
+   <circle cx="16" cy="140" r="7" style="fill:${C.ink}"/>
+   <g style="font:700 22px Caveat, cursive;fill:${C.ink}" text-anchor="middle">
+    <text x="322" y="147">1</text><text x="322" y="95">2</text><text x="322" y="41">3</text>
+   </g>
+  </svg>
+  <h1>¿No sabes qué <span class="wash w-yellow">camino</span> coger?</h1>
+  <p class="lead">Dibuja tres vidas posibles para tus próximos cinco años. No tienes que elegir ninguna hoy. Solo verlas sobre el papel ya aclara mucho.</p>
+  <div class="btns">
+   <button class="btn" type="button" data-go="como-funciona">Empezar</button>
+   <button class="btn ghost" type="button" id="exBtn">Ver un ejemplo</button>
+  </div>
+  <p class="note">Lleva unos 30-45 minutos. Lo que escribas se guarda solo en este móvil.</p>
+ </section>`,
+
+'como-funciona':()=>`
+ <h1><span class="wash">Cómo funciona</span></h1>
+ <p class="lead">El ejercicio viene del método <i>Designing Your Life</i>, de Bill Burnett y Dave Evans (Universidad de Stanford). En vez de buscar la respuesta correcta, diseñas varias opciones y las comparas.</p>
+ <div class="lifes">
+  ${LIVES.map((L,i)=>`<div class="lifechip l${i+1}"><b><span class="wash">Vida ${i+1} · ${L.name}</span></b><span>${L.ask}</span></div>`).join('')}
+ </div>
+ <div class="block">
+ <ol class="steps">
+  <li><span class="n">1</span><div><h3>Escribe las tres vidas</h3><p>Un título corto, qué pasa cada año, qué tendrías que definir y qué preguntas te plantea.</p></div></li>
+  <li><span class="n">2</span><div><h3>Puntúa cada una</h3><p>Recursos, interés, confianza y coherencia, de 0 a 100.</p></div></li>
+  <li><span class="n">3</span><div><h3>Compáralas</h3><p>Verlas juntas te dice más que pensarlas por separado.</p></div></li>
+  <li><span class="n">4</span><div><h3>Pruébalas en pequeño</h3><p>Una conversación y un experimento por vida. Así decides con datos, no con miedo.</p></div></li>
+ </ol>
+ </div>
+ <div class="block">
+  <h2>Así queda una vida terminada</h2>
+  <figure class="sample">
+   <a href="ejemplo-vida-3.jpg" target="_blank" rel="noopener"><img src="ejemplo-vida-3.jpg" alt="Ejemplo de la vida 3: viaje a Asia, formación en yoga y una escuela propia en cinco años, con sus indicadores y preguntas" loading="lazy" width="1536" height="1024"></a>
+   <figcaption>Toca la imagen para verla en grande.</figcaption>
+  </figure>
+ </div>`,
+
+'comparar':()=>`
+ <h1><span class="wash">Las tres, juntas</span></h1>
+ <p class="lead">Fíjate en dónde destaca cada una. Una vida con poca confianza y mucho interés no está descartada: igual solo necesita un experimento.</p>
+ <div class="legend">${[0,1,2].map(i=>`<div class="l${i+1}"><b>${i+1}</b><span>${esc(lifeTitle(i))}</span></div>`).join('')}</div>
+ ${GAUGES.map(G=>`<div class="block"><h2>${G.l}</h2><p class="hint">${G.h}</p><div class="cmp">
+   ${[0,1,2].map(i=>{const v=S.lives[i].g[G.k];return `<div class="cmp-row l${i+1}"><b>${i+1}</b><div class="cmp-track"><span style="width:${v}%"></span></div><span class="cmp-n">${v}</span></div>`}).join('')}
+ </div></div>`).join('')}
+ <div class="block"><h2>¿Cuál te da más energía?</h2><p class="hint">Al imaginarla, ¿cuál te hace sonreír? No es una decisión. Es una pista.</p>
+  <div class="picks">${[0,1,2].map(i=>`<label class="pick l${i+1}"><input type="radio" name="pick" value="${i}" ${S.pick===String(i)?'checked':''}><span>${esc(lifeTitle(i))}</span></label>`).join('')}</div>
+ </div>`,
+
+'probar':()=>`
+ <h1><span class="wash w-green">Pruébalas</span> en pequeño</h1>
+ <p class="lead">Ahora no toca elegir, toca probar. Para cada vida, una persona con la que hablar y un experimento que puedas hacer este mes.</p>
+ ${[0,1,2].map(i=>`<div class="block l${i+1}">
+   <h2><span class="wash">Vida ${i+1}</span></h2><p><b>${esc(lifeTitle(i))}</b></p>
+   <label class="hint" for="t${i}">¿Con quién podrías hablar que ya viva algo parecido?</label>
+   <input type="text" id="t${i}" data-path="next.${i}.talk" value="${esc(S.next[i].talk)}" placeholder="Alguien que ya trabaje en eso">
+   <label class="hint" for="e${i}">¿Qué experimento pequeño podrías hacer?</label>
+   <input type="text" id="e${i}" data-path="next.${i}.test" value="${esc(S.next[i].test)}" placeholder="Un fin de semana, una clase, un voluntariado">
+ </div>`).join('')}
+ <div class="block"><h2>Enséñaselo a alguien</h2><p class="hint">Comparte tus tres vidas con una o dos personas de confianza. Pídeles que te hagan preguntas, no que te digan qué hacer. Las preguntas te ayudan a pensar. Los consejos te empujan hacia su vida, no hacia la tuya.</p></div>`,
+
+'resumen':()=>{
+  const sum=[0,1,2].map(i=>{const L=S.lives[i],n=S.next[i];
+   const yrs=L.years.map((y,j)=>y.trim()?`<li><b>Año ${j+1}</b> · ${esc(y)}</li>`:'').join('');
+   const defs=L.def.filter(d=>d.t.trim()).map(d=>`<li>${d.ok?'✓ ':''}${esc(d.t)}</li>`).join('');
+   const qs=L.q.filter(q=>q.trim()).map(q=>`<li>${esc(q)}</li>`).join('');
+   return `<div class="sumlife l${i+1}">
+    <p class="eyebrow">Vida ${i+1}${S.pick===String(i)?' · la que más energía me da':''}</p>
+    <h2><span class="wash">${esc(lifeTitle(i))}</span></h2>
+    ${yrs?`<ul>${yrs}</ul>`:''}
+    <div class="mini">${GAUGES.map(G=>`<div>${dial(L.g[G.k],G.c)}<b>${L.g[G.k]}</b>${G.l}</div>`).join('')}</div>
+    ${defs?`<p class="eyebrow">Qué definir</p><ul>${defs}</ul>`:''}
+    ${qs?`<p class="eyebrow">Preguntas útiles</p><ul>${qs}</ul>`:''}
+    ${n.talk||n.test?`<p class="hint">${n.talk?'Hablar con: '+esc(n.talk)+'. ':''}${n.test?'Probar: '+esc(n.test)+'.':''}</p>`:''}
+   </div>`}).join('');
+  return `<h1>Mi <span class="wash">Odyssey Plan</span></h1>
+  <p class="lead">Esto es lo que has diseñado. Vuelve a mirarlo dentro de un mes, cuando hayas tenido alguna conversación o hecho algún experimento.</p>
+  ${sum}
+  <div class="block"><h2>Descárgalo en PDF</h2><p class="hint">Una página por cada vida, como un cuaderno, y una última con las tres comparadas. Listo para imprimir o compartir.</p>
+   <div class="btns"><button class="btn" type="button" id="pdfBtn" hidden>Descargar PDF</button><span class="hint" id="pdfMsg" aria-live="polite"></span></div>
+  </div>
+  <div class="block"><h2>Llévatelo en texto</h2><p class="hint">Cópialo y pégalo en tus notas o mándaselo a alguien.</p>
+   <textarea id="copyText" readonly aria-label="Tu plan en texto">${esc(plainText())}</textarea>
+   <div class="btns"><button class="btn small" type="button" id="copyBtn">Copiar texto</button><span class="ok" id="copyOk" hidden>¡Copiado!</span></div>
+  </div>
+  <div class="block"><h2>Empezar de cero</h2><p class="hint">Borra todo lo que has escrito en este móvil.</p>
+   <div class="btns"><button class="btn small ghost" type="button" id="resetBtn">Borrar todo</button>
+   <button class="btn small" type="button" id="resetYes" hidden>Sí, borrar</button><button class="btn small ghost" type="button" id="resetNo" hidden>Cancelar</button></div>
+  </div>`;}
+};
+[0,1,2].forEach(i=>{PAGES['vida-'+(i+1)]=()=>lifePage(i)});
+
+function lifePage(i){
+  const L=LIVES[i],V=S.lives[i],w=words(V.title);
+  return `<div class="l${i+1}" style="display:flex;flex-direction:column;gap:22px">
+  <header class="lifehead">
+   <p class="eyebrow">Vida ${i+1} de 3</p>
+   <h1><span style="white-space:nowrap">Vida ${i+1} ·</span> <span class="wash">${L.name}</span></h1>
+   <div><p class="ask">${L.ask}</p>${swoosh}</div>
+   <p class="hint">${L.desc}</p>
+  </header>
+
+  <div class="block"><h2><label for="title${i}">Ponle título</label></h2><p class="hint">Seis palabras como máximo. Que se entienda de un vistazo.</p>
+   <input type="text" id="title${i}" data-path="lives.${i}.title" value="${esc(V.title)}" maxlength="70" placeholder="${L.ph}">
+   <span class="counter ${w>6?'over':''}" id="cnt${i}">${w} / 6 palabras</span></div>
+
+  <div class="block"><h2>Cinco años, año a año</h2><p class="hint">Qué pasa en tu trabajo y en tu vida. Frases cortas y concretas.</p>
+   <div class="tl" tabindex="0" aria-label="Línea de cinco años"><div class="tl-in">
+    ${[0,1,2,3,4].map(j=>`<div class="tl-card"><span class="tick">${j}</span>${j===4?'<span class="end">5</span>':''}
+      <h3><label for="y${i}${j}"><span class="wash ${j%2?'w-yellow':'w-blue'}">Año ${j+1}</span></label></h3>
+      <small>${Y0+j}</small>
+      <textarea id="y${i}${j}" data-path="lives.${i}.years.${j}" placeholder="${j===0?'¿Qué es lo primero que harías?':'¿Y después?'}">${esc(V.years[j])}</textarea></div>`).join('')}
+   </div></div>
+   <p class="swipe">Desliza para ver los cinco años →</p>
+  </div>
+
+  <div class="block"><h2>¿Atascado?</h2>
+   <p class="ask" id="ideaQ" style="font-family:var(--hand);font-size:1.5rem;line-height:1.15">Pulsa el botón y te doy una pregunta para arrancar.</p>
+   <div class="btns"><button class="btn small ghost" type="button" id="ideaBtn">Dame una idea</button></div></div>
+
+  <div class="block"><h2><span class="wash w-blue">Evaluación del plan</span></h2><p class="hint">De 0 a 100. Mueve cada indicador sin pensarlo mucho.</p>
+   <div class="gauges">${GAUGES.map(G=>`<div class="gauge" data-g="${G.k}" data-c="${G.c}">
+     <label class="gl" for="g${i}${G.k}">${G.l}</label>${dial(V.g[G.k],G.c)}<span class="num">${V.g[G.k]}</span>
+     <span class="gh">${G.h}</span>
+     <input type="range" id="g${i}${G.k}" min="0" max="100" step="5" value="${V.g[G.k]}" data-path="lives.${i}.g.${G.k}" data-num="1"></div>`).join('')}</div></div>
+
+  <div class="block"><h2><span class="wash w-yellow">Qué definir</span></h2><p class="hint">Lo que tendrías que resolver para que esta vida fuera posible. Márcalo cuando lo tengas claro.</p>
+   <div class="checks">${V.def.map((d,j)=>`<div class="check"><input type="checkbox" id="dk${i}${j}" aria-label="Definido ${j+1}" data-path="lives.${i}.def.${j}.ok" data-bool="1" ${d.ok?'checked':''}><textarea class="grow" rows="1" id="d${i}${j}" aria-label="Qué definir ${j+1}" data-path="lives.${i}.def.${j}.t" placeholder="${['Formación que necesito','Cuánto dinero hace falta','Dónde lo haría','Con quién'][j]}">${esc(d.t)}</textarea></div>`).join('')}</div></div>
+
+  <div class="block"><h2><span class="wash w-blue">Preguntas útiles</span></h2><p class="hint">Lo que te gustaría saber antes de lanzarte. Te servirán para probarla después.</p>
+   <div class="qs">${[0,1,2].map(j=>`<div class="q"><span class="bullet"></span><textarea class="grow" rows="1" id="q${i}${j}" aria-label="Pregunta ${j+1}" data-path="lives.${i}.q.${j}" placeholder="${['¿Me ganaría la vida?','¿Qué perdería por el camino?','¿Me gustaría el día a día?'][j]}">${esc(V.q[j])}</textarea></div>`).join('')}</div></div>
+  </div>`;
+}
+
+function plainText(){
+  let t='MI ODYSSEY PLAN\n';
+  [0,1,2].forEach(i=>{const L=S.lives[i],n=S.next[i];
+   t+=`\nVIDA ${i+1} · ${lifeTitle(i)}${S.pick===String(i)?' (la que más energía me da)':''}\n`;
+   L.years.forEach((y,j)=>{if(y.trim())t+=`Año ${j+1}: ${y}\n`});
+   t+=`Recursos ${L.g.recursos} · Interés ${L.g.gusto} · Confianza ${L.g.confianza} · Coherencia ${L.g.coherencia}\n`;
+   const d=L.def.filter(x=>x.t.trim());if(d.length)t+='Qué definir: '+d.map(x=>(x.ok?'[x] ':'[ ] ')+x.t).join(' / ')+'\n';
+   const qs=L.q.filter(q=>q.trim());if(qs.length)t+='Preguntas: '+qs.join(' / ')+'\n';
+   if(n.talk)t+='Hablar con: '+n.talk+'\n';if(n.test)t+='Probar: '+n.test+'\n';});
+  return t;
+}
+
+/* ---------- Exportar a PDF ---------- */
+const dlP=(window.claude&&window.claude.use)?window.claude.use('downloads').catch(()=>null):Promise.resolve(null);
+const PW=1754,PH=1240;
+const WS={blue:washSvg(C.blue,3),green:washSvg(C.green,7),red:washSvg(C.red,11),yellow:washSvg(C.yellow,5)};
+const LIFEW=['green','red','yellow'];
+let jsPdfP=null;
+function loadJsPdf(){
+  if(window.jspdf)return Promise.resolve(window.jspdf);
+  if(!jsPdfP)jsPdfP=new Promise((res,rej)=>{const s=document.createElement('script');
+    s.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    s.onload=()=>window.jspdf?res(window.jspdf):rej(new Error('load'));s.onerror=()=>{jsPdfP=null;rej(new Error('load'))};
+    document.head.appendChild(s)});
+  return jsPdfP;
+}
+const imgCache={};
+function svgImg(svg){
+  if(!imgCache[svg])imgCache[svg]=new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg)});
+  return imgCache[svg];
+}
+function dialStandalone(v,col){
+  return dial(v,col).replace('<svg viewBox="0 0 140 82" aria-hidden="true">',
+   '<svg xmlns="http://www.w3.org/2000/svg" width="280" height="164" viewBox="0 0 140 82"><defs><filter id="wc" x="-15%" y="-15%" width="130%" height="130%"><feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="3" seed="4" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="7"/></filter></defs>');
+}
+const F=(size,w,hand)=>`${w} ${size}px ${hand?'Caveat, "Segoe Print", cursive':'Kalam, "Segoe UI", sans-serif'}`;
+function newCanvas(){const cv=document.createElement('canvas');cv.width=PW;cv.height=PH;const ctx=cv.getContext('2d');
+  ctx.fillStyle=C.paper;ctx.fillRect(0,0,PW,PH);ctx.textBaseline='alphabetic';return[cv,ctx]}
+function wrap(ctx,t,maxW){const ws=String(t||'').split(/\s+/).filter(Boolean),out=[];let cur='';
+  for(const w of ws){const test=cur?cur+' '+w:w;if(ctx.measureText(test).width>maxW&&cur){out.push(cur);cur=w}else cur=test}
+  if(cur)out.push(cur);return out}
+function para(ctx,t,x,y,maxW,lh,maxLines){let ls=wrap(ctx,t,maxW);
+  if(maxLines&&ls.length>maxLines){ls=ls.slice(0,maxLines);ls[maxLines-1]=ls[maxLines-1].replace(/\s*\S*$/,'')+'…'}
+  ls.forEach((l,k)=>ctx.fillText(l,x,y+k*lh));return y+Math.max(ls.length,1)*lh}
+async function washText(ctx,txt,x,y,font,key,pad){
+  pad=pad??18;ctx.font=font;ctx.textAlign='left';const w=ctx.measureText(txt).width;const size=parseInt(font.match(/(\d+)px/)[1],10);
+  ctx.drawImage(await svgImg(WS[key]),x-pad,y-size*0.92,w+pad*2,size*1.32);
+  ctx.fillStyle=C.ink;ctx.fillText(txt,x,y);return w}
+async function washCentered(ctx,txt,cx,y,font,key){ctx.font=font;const w=ctx.measureText(txt).width;return washText(ctx,txt,cx-w/2,y,font,key)}
+function vline(ctx,x,y0,y1){ctx.strokeStyle=C.pencil;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,y0);ctx.lineTo(x,y1);ctx.stroke()}
+
+async function pdfLife(i){
+  const[cv,ctx]=newCanvas();const L=S.lives[i],M=LIVES[i];
+  await washText(ctx,'Odyssey Plan',96,100,F(54,700,1),'blue',24);
+  ctx.font=F(74,700,1);ctx.fillStyle=C.ink;ctx.textAlign='left';const pre=`Vida ${i+1} · `;ctx.fillText(pre,440,100);
+  await washText(ctx,M.name,440+ctx.measureText(pre).width,100,F(74,700,1),LIFEW[i],16);
+  let y=158;
+  if(L.title.trim()){ctx.font=F(46,700,1);ctx.fillStyle=C.ink;ctx.fillText(L.title.trim(),440,y);y+=44}
+  ctx.font=F(25,400);ctx.fillStyle=C.ink2;para(ctx,M.ask,440,y,1240,32,1);
+
+  const X0=70,X1=1684,cw=(X1-X0)/5,AY=268;
+  ctx.strokeStyle=C.ink;ctx.lineWidth=3.5;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(X0,AY);ctx.lineTo(X1+8,AY);ctx.stroke();
+  ctx.fillStyle=C.ink;ctx.beginPath();ctx.moveTo(X1+28,AY);ctx.lineTo(X1+6,AY-11);ctx.lineTo(X1+6,AY+11);ctx.closePath();ctx.fill();
+  ctx.font=F(36,700,1);ctx.textAlign='center';
+  for(let k=0;k<=5;k++){ctx.fillStyle=C.ink;ctx.fillText(String(k),X0+k*cw,AY-14);vline(ctx,X0+k*cw,AY+8,690)}
+  for(let j=0;j<5;j++){const cx=X0+j*cw+cw/2;
+    await washCentered(ctx,'Año '+(j+1),cx,AY+70,F(46,700,1),j%2?'yellow':'blue');
+    ctx.font=F(20,400);ctx.fillStyle=C.ink2;ctx.textAlign='center';ctx.fillText(String(Y0+j),cx,AY+102);
+    ctx.textAlign='left';ctx.font=F(25,400);ctx.fillStyle=C.ink;para(ctx,L.years[j].trim()||'—',X0+j*cw+20,AY+150,cw-40,35,8)}
+
+  const BY=765;
+  vline(ctx,620,725,1180);vline(ctx,1170,725,1180);
+  const ew=await washText(ctx,'Evaluación del plan',96,BY,F(46,700,1),'red');
+  ctx.font=F(22,400);ctx.fillStyle=C.ink2;ctx.textAlign='left';ctx.fillText('(0-100)',96+ew+30,BY);
+  const pos=[[200,812],[470,812],[200,1012],[470,1012]];
+  for(let k=0;k<4;k++){const G=GAUGES[k],[cx,ly]=pos[k],v=L.g[G.k];
+    ctx.font=F(36,700,1);ctx.fillStyle=C.ink;ctx.textAlign='center';ctx.fillText(G.l,cx,ly);
+    ctx.drawImage(await svgImg(dialStandalone(v,G.c)),cx-90,ly+10,180,105);
+    await washCentered(ctx,String(v),cx,ly+152,F(36,700,1),'yellow')}
+
+  await washText(ctx,'Qué definir',666,BY,F(46,700,1),'yellow');
+  let dy=828;ctx.textAlign='left';
+  const defs=L.def.filter(d=>d.t.trim());
+  if(!defs.length){ctx.font=F(24,400);ctx.fillStyle=C.ink2;ctx.fillText('Sin completar',666,dy)}
+  for(const d of defs){if(dy>1150)break;
+    ctx.strokeStyle=C.ink;ctx.lineWidth=2.5;ctx.strokeRect(666,dy-22,26,26);
+    if(d.ok){ctx.beginPath();ctx.moveTo(671,dy-9);ctx.lineTo(678,dy-1);ctx.lineTo(691,dy-20);ctx.stroke()}
+    ctx.font=F(24,400);ctx.fillStyle=C.ink;dy=para(ctx,d.t,708,dy,430,32,3)+18}
+
+  await washText(ctx,'Preguntas útiles',1216,BY,F(46,700,1),'blue');
+  let qy=828;ctx.textAlign='left';
+  const qs=L.q.filter(q=>q.trim());
+  if(!qs.length){ctx.font=F(24,400);ctx.fillStyle=C.ink2;ctx.fillText('Sin completar',1216,qy)}
+  for(const q of qs){if(qy>1150)break;
+    ctx.globalAlpha=.75;ctx.fillStyle=C.blue;ctx.beginPath();ctx.arc(1226,qy-9,8,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
+    ctx.font=F(24,400);ctx.fillStyle=C.ink;qy=para(ctx,q,1250,qy,430,32,3)+18}
+
+  const n=S.next[i],steps=[n.talk&&('Hablar con: '+n.talk),n.test&&('Probar: '+n.test)].filter(Boolean).join('   ·   ');
+  if(steps){ctx.font=F(22,400);ctx.fillStyle=C.ink2;ctx.textAlign='left';para(ctx,'Próximos pasos  →  '+steps,96,1214,1580,28,1)}
+  return cv;
+}
+
+async function pdfCompare(){
+  const[cv,ctx]=newCanvas();
+  await washText(ctx,'Odyssey Plan',96,100,F(54,700,1),'blue',24);
+  ctx.font=F(74,700,1);ctx.fillStyle=C.ink;ctx.textAlign='left';const pre='Las tres vidas, ';ctx.fillText(pre,440,100);
+  await washText(ctx,'juntas',440+ctx.measureText(pre).width,100,F(74,700,1),'yellow',16);
+  let y=210;
+  for(const G of GAUGES){
+    ctx.font=F(42,700,1);ctx.fillStyle=C.ink;ctx.textAlign='left';ctx.fillText(G.l,96,y);const lw=ctx.measureText(G.l).width;
+    ctx.font=F(20,400);ctx.fillStyle=C.ink2;ctx.fillText(G.h,96+lw+26,y);
+    for(let i=0;i<3;i++){const ry=y+50+i*44,v=S.lives[i].g[G.k];
+      ctx.font=F(32,700,1);ctx.fillStyle=C.ink;ctx.textAlign='left';ctx.fillText(String(i+1),100,ry);
+      ctx.strokeStyle=C.pencil;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(140,ry+4);ctx.lineTo(790,ry+4);ctx.stroke();
+      if(v>0)ctx.drawImage(await svgImg(WS[LIFEW[i]]),134,ry-28,Math.max(30,662*v/100),36);
+      ctx.font=F(30,700,1);ctx.fillStyle=C.ink;ctx.textAlign='right';ctx.fillText(String(v),850,ry)}
+    y+=50+3*44+40}
+  vline(ctx,910,160,1170);
+  let ry=200;
+  for(let i=0;i<3;i++){const n=S.next[i];
+    const w=await washText(ctx,`Vida ${i+1}`,966,ry,F(40,700,1),LIFEW[i]);
+    ctx.font=F(36,700,1);ctx.fillStyle=C.ink;ctx.textAlign='left';para(ctx,S.lives[i].title.trim()||LIVES[i].name,966+w+30,ry,1684-(966+w+30),36,1);
+    ctx.font=F(23,400);ctx.fillStyle=C.ink;let yy=ry+44;
+    yy=para(ctx,'Hablar con: '+(n.talk.trim()||'—'),966,yy,710,31,2);
+    yy=para(ctx,'Probar: '+(n.test.trim()||'—'),966,yy,710,31,2);
+    ry=yy+62}
+  if(S.pick!==''){const p=Number(S.pick);
+    ctx.font=F(36,700,1);ctx.fillStyle=C.ink;ctx.textAlign='left';ctx.fillText('La que más energía me da:',966,ry+10);
+    ctx.font=F(36,700,1);await washText(ctx,S.lives[p].title.trim()||('Vida '+(p+1)),966,ry+62,F(36,700,1),LIFEW[p])}
+  ctx.font=F(20,400);ctx.fillStyle=C.ink2;ctx.textAlign='left';
+  ctx.fillText('Ejercicio basado en Designing Your Life, de Bill Burnett y Dave Evans.',96,1214);
+  return cv;
+}
+
+async function buildPages(){
+  try{await Promise.all([document.fonts.load(F(40,700,1)),document.fonts.load(F(24,400)),document.fonts.load(F(24,700))])}catch(e){}
+  return[await pdfLife(0),await pdfLife(1),await pdfLife(2),await pdfCompare()];
+}
+async function exportPdf(btn,msg,dl){
+  btn.disabled=true;msg.textContent='Preparando el PDF…';
+  try{
+    let jp;try{jp=await loadJsPdf()}catch(e){msg.textContent='No se pudo preparar el PDF. Revisa la conexión y vuelve a intentarlo.';return}
+    const pages=await buildPages();
+    const doc=new jp.jsPDF({orientation:'landscape',unit:'mm',format:'a4',compress:true});
+    pages.forEach((cv,k)=>{if(k)doc.addPage('a4','landscape');doc.addImage(cv.toDataURL('image/jpeg',0.9),'JPEG',0,0,297,210)});
+    if(!dl){doc.save('mi-odyssey-plan.pdf');msg.textContent='PDF descargado.';return}
+    const r=await dl.save({filename:'mi-odyssey-plan.pdf',data:doc.output('blob')});
+    msg.textContent=r&&r.status==='delivered'?'PDF enviado.':'PDF descargado.';
+  }catch(e){
+    const c=e&&e.code;
+    msg.textContent=c==='declined'?'Descarga cancelada.':c==='rate_limited'?'Espera un momento y vuelve a intentarlo.':'No se pudo descargar el PDF.';
+  }finally{btn.disabled=false}
+}
+
+let ideaIdx={};
+function current(){const h=location.hash.slice(1);return ROUTES.includes(h)?h:'inicio'}
+function render(){
+  const r=current(),idx=ROUTES.indexOf(r);
+  view.innerHTML=PAGES[r]();
+  document.getElementById('stepLabel').textContent=`Paso ${idx+1} de ${ROUTES.length}`;
+  document.getElementById('barFill').style.width=((idx+1)/ROUTES.length*100)+'%';
+  const prev=document.getElementById('prevBtn'),next=document.getElementById('nextBtn');
+  prev.hidden=idx===0;
+  next.textContent=idx===0?'Empezar':idx===ROUTES.length-2?'Ver resumen':idx===ROUTES.length-1?'Volver al inicio':'Siguiente';
+  bind(r);
+  window.scrollTo(0,0);
+}
+function go(r){if(location.hash.slice(1)===r)render();else location.hash=r}
+
+function grow(el){el.style.height='auto';el.style.height=el.scrollHeight+'px'}
+function bind(r){
+  view.querySelectorAll('textarea.grow').forEach(el=>{grow(el);el.addEventListener('input',()=>grow(el))});
+  view.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+  view.querySelectorAll('[data-path]').forEach(el=>{
+    const h=()=>{
+      const v=el.dataset.num?Number(el.value):el.dataset.bool?el.checked:el.value;setP(el.dataset.path,v);
+      if(el.type==='range'){const g=el.closest('.gauge');g.querySelector('svg').outerHTML=dial(v,g.dataset.c);g.querySelector('.num').textContent=v}
+      if(el.id.startsWith('title')){const i=el.id.slice(5),w=words(el.value),c=document.getElementById('cnt'+i);c.textContent=w+' / 6 palabras';c.classList.toggle('over',w>6)}
+    };
+    el.addEventListener(el.type==='checkbox'?'change':'input',h);
+  });
+  view.querySelectorAll('input[name=pick]').forEach(el=>el.onchange=()=>{S.pick=el.value;save()});
+  const ex=document.getElementById('exBtn');
+  if(ex)ex.onclick=()=>{S=example();save();go('vida-3')};
+  const ib=document.getElementById('ideaBtn');
+  if(ib){const i=Number(r.slice(-1))-1;ib.onclick=()=>{ideaIdx[i]=((ideaIdx[i]??-1)+1)%LIVES[i].ideas.length;document.getElementById('ideaQ').textContent=LIVES[i].ideas[ideaIdx[i]];ib.textContent='Otra idea'}}
+  const cb=document.getElementById('copyBtn');
+  if(cb)cb.onclick=()=>{const ta=document.getElementById('copyText'),ok=document.getElementById('copyOk');
+    const done=()=>{ok.hidden=false;setTimeout(()=>ok.hidden=true,2000)};
+    const fallback=()=>{ta.focus();ta.select();try{document.execCommand('copy');done()}catch(e){}};
+    try{navigator.clipboard.writeText(ta.value).then(done,fallback)}catch(e){fallback()}};
+  const pb=document.getElementById('pdfBtn');
+  if(pb){const msg=document.getElementById('pdfMsg');
+    dlP.then(dl=>{if(!document.body.contains(pb))return;
+      if(dl||!window.claude){pb.hidden=false;pb.onclick=()=>exportPdf(pb,msg,dl)}
+      else msg.textContent='La descarga en PDF no está disponible en esta vista. Puedes copiar el texto de abajo.'});}
+  const rb=document.getElementById('resetBtn');
+  if(rb){const y=document.getElementById('resetYes'),n=document.getElementById('resetNo');
+    rb.onclick=()=>{rb.hidden=true;y.hidden=false;n.hidden=false};
+    n.onclick=()=>{rb.hidden=false;y.hidden=true;n.hidden=true};
+    y.onclick=()=>{S=blank();save();go('inicio')};}
+}
+
+document.getElementById('prevBtn').onclick=()=>{const i=ROUTES.indexOf(current());if(i>0)go(ROUTES[i-1])};
+document.getElementById('nextBtn').onclick=()=>{const i=ROUTES.indexOf(current());go(i<ROUTES.length-1?ROUTES[i+1]:'inicio')};
+window.addEventListener('hashchange',render);
+render();
+})();
+</script>
+
+</body>
+</html>
